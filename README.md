@@ -24,4 +24,6 @@ Desenvolvendo um jogo em cmd para testar habilidades e aprender mais.
 │
 ├── /tests          # Testes unitários
 │
+├── /utils          # Scripts auxiliares
+│
 └── /weather        # Clima e suas alterações de jogabilidade
