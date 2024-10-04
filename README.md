@@ -1,5 +1,6 @@
 Desenvolvendo um jogo em cmd para testar habilidades e aprender mais.
 
+```
 /cmd-game
 │
 ├── main.py         # O iniciador e principal do jogo
@@ -27,3 +28,4 @@ Desenvolvendo um jogo em cmd para testar habilidades e aprender mais.
 ├── /utils          # Scripts auxiliares
 │
 └── /weather        # Clima e suas alterações de jogabilidade
+```
