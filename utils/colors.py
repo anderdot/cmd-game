@@ -18,7 +18,13 @@ class Color(Enum):
         return self.value
 
 def print_color(text, color=Color.white, styles=None):
-    """Print text with specific color and styles."""
+    """Print text with specific color and styles.
+
+    Args:
+        text (str): Text to print.
+        color (Color, optional): Color to use. Defaults to Color.white.
+        styles (list[Color], optional): List of styles to apply. Defaults to None.
+    """
     if styles is None:
         styles = []
 
