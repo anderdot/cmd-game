@@ -17,30 +17,24 @@ class Color(Enum):
     def __str__(self):
         return self.value
 
-def print_color(text, color=Color.white, styles=None, end='\n'):
+def print_color(text, color=Color.reset, styles=[], end='\n'):
     """Print text with specific color and styles.
 
     Args:
         text (str): Text to print.
-        color (Color, optional): Color to use. Defaults to Color.white.
-        styles (list[Color], optional): List of styles to apply. Defaults to None.
+        color (Color, optional): Color to use.
+        styles (list[Color], optional): List of styles to apply.
     """
-    if styles is None:
-        styles = []
-
     styled_text = f"{''.join([str(style) for style in styles])}{text}"
     print(f"{color}{styled_text}{color.reset}", end=end)
 
-def string_color(text, color=Color.white, styles=None):
+def string_color(text, color=Color.reset, styles=[]):
     """Return a string with specific color and styles.
 
     Args:
         text (str): Text to print.
-        color (Color, optional): Color to use. Defaults to Color.white.
-        styles (list[Color], optional): List of styles to apply. Defaults to None.
+        color (Color, optional): Color to use.
+        styles (list[Color], optional): List of styles to apply.
     """
-    if styles is None:
-        styles = []
-
     styled_text = f"{''.join([str(style) for style in styles])}{text}"
     return f"{color}{styled_text}{color.reset}"
