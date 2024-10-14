@@ -19,6 +19,10 @@ Desenvolvendo um jogo em cmd para testar habilidades e aprender mais.
 │
 ├── /environments   # Ambientes onde a aventura se passa
 │
+├── /graphics       # AscII arts do jogo
+│
+├── /locales        # Arquivos de idioma
+│
 ├── /sounds         # Possíveis sons de habilidades, monstros etc.
 │
 ├── /status         # Todos os status positivos e negativos do jogo
@@ -27,5 +31,5 @@ Desenvolvendo um jogo em cmd para testar habilidades e aprender mais.
 │
 ├── /utils          # Scripts auxiliares
 │
-└── /weather        # Clima e suas alterações de jogabilidade
+└── /weathers       # Clima e suas alterações de jogabilidade
 ```
