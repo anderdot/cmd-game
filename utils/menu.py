@@ -57,7 +57,7 @@ def update_option(current_option, change, total_options):
     """
     return (current_option + change) % total_options
 
-def display_menu(options, rows, cols, x=2, y=20):
+def display_menu(options, rows, cols, x=2, y=20, box_width=BOX_WIDTH):
     """Displays the menu in a grid of rows and columns, allowing navigation using the 'WASD' keys.
 
     Args:
@@ -66,6 +66,7 @@ def display_menu(options, rows, cols, x=2, y=20):
         cols (int): Number of columns in the menu grid.
         x (int, optional): The horizontal position (column) to display the menu.
         y (int, optional): The vertical position (line) to display the menu.
+        box_width (int, optional): The width of each menu option box.
     """
     current_option = 0
     total_options = len(options)
@@ -81,15 +82,15 @@ def display_menu(options, rows, cols, x=2, y=20):
                         color = SELECTED_COLOR if is_selected else UNSELECTED_COLOR
                         style = SELECTED_STYLE if is_selected else UNSELECTED_STYLE
 
-                        move_cursor(x + col * (BOX_WIDTH + 2) + col, y + row * 3)
-                        print_color(f"┌{'─' * BOX_WIDTH}┐", color, style)
+                        move_cursor(x + col * (box_width + 2) + col, y + row * 3)
+                        print_color(f"┌{'─' * box_width}┐", color, style)
 
                         option_text = options[index][0]
-                        move_cursor(x + col * (BOX_WIDTH + 2) + col, y + row * 3 + 1)
-                        print_color(f"│ {option_text:^{BOX_WIDTH - 2}} │", color, style)
+                        move_cursor(x + col * (box_width + 2) + col, y + row * 3 + 1)
+                        print_color(f"│ {option_text:^{box_width - 2}} │", color, style)
 
-                        move_cursor(x + col * (BOX_WIDTH + 2) + col, y + row * 3 + 2)
-                        print_color(f"└{'─' * BOX_WIDTH}┘", color, style)
+                        move_cursor(x + col * (box_width + 2) + col, y + row * 3 + 2)
+                        print_color(f"└{'─' * box_width}┘", color, style)
 
             key = msvcrt.getch()
             if key == b'\xe0':
