@@ -25,7 +25,7 @@ def show_cursor():
         cursor_info.bVisible = True
         ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(cursor_info))
 
-def move_cursor(x = 0, y = 0):
+def move_cursor(x=0, y=0):
     """Move the cursor to a specific position in the terminal.
 
     Args:
