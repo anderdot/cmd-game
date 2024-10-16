@@ -1,0 +1,15 @@
+{
+    "languages": {
+        "pt-br": {
+            "name": "Português",
+            "file": "locales/pt.json",
+            "status": "complete"
+        },
+        "en": {
+            "name": "English",
+            "file": "locales/en.json",
+            "status": "incomplete"
+        }
+    },
+    "default_language": "pt-br"
+}

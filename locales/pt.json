@@ -1,0 +1,12 @@
+{
+    "start_menu": {
+        "start": "Começar jogo",
+        "options": "Opções",
+        "about": "Sobre",
+        "exit": "Sair"
+    },
+    "settings": {
+        "select_language": "Selecione o idioma",
+        "selected_language": "Idioma selecionado."
+    }
+}
