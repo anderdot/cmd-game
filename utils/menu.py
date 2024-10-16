@@ -1,5 +1,5 @@
 import msvcrt
-from utils.colors import Color, print_color
+from utils.colors import Color, print_color, string_color
 from utils.cursor import hide_cursor, show_cursor, move_cursor
 
 BOX_WIDTH = 41
@@ -57,7 +57,37 @@ def update_option(current_option, change, total_options):
     """
     return (current_option + change) % total_options
 
-def display_menu(options, rows, cols, x=2, y=20, box_width=BOX_WIDTH):
+def fullbox_menu(cols, rows, x, y, box_width, text):
+    """Displays a full-box menu with a border and a grid of options.
+
+    Args:
+        cols (int): Number of columns in the menu grid.
+        rows (int): Number of rows in the menu grid.
+        x (int): The horizontal position (column) to display the menu.
+        y (int): The vertical position (line) to display the menu.
+        box_width (int): The width of each menu option box.
+    """
+    box_height = 3
+    total_width = cols * (box_width + 4) + (cols - 1)
+    total_height = rows * box_height
+
+    move_cursor(x - 2, y - 3)
+    print_color(f"┌{'─' * total_width}┐", SELECTED_COLOR)
+    move_cursor(x - 2, y - 2)
+    print_color(f"│{string_color(text=text, reset=Color.yellow):^{total_width + 8}}│", SELECTED_COLOR)
+    move_cursor(x - 2, y - 1)
+    print_color(f"├{'─' * total_width}┤", SELECTED_COLOR)
+
+    for i in range(total_height):
+        move_cursor(x - 2, y + i)
+        print_color("│", SELECTED_COLOR)
+        move_cursor(x + total_width - 1, y + i)
+        print_color("│", SELECTED_COLOR)
+
+    move_cursor(x - 2, y + total_height)
+    print_color(f"└{'─' * total_width}┘", SELECTED_COLOR)
+
+def display_menu(options, rows, cols, x=2, y=20, box_width=BOX_WIDTH, fullbox=False, text=None):
     """Displays the menu in a grid of rows and columns, allowing navigation using the 'WASD' keys.
 
     Args:
@@ -71,6 +101,9 @@ def display_menu(options, rows, cols, x=2, y=20, box_width=BOX_WIDTH):
     current_option = 0
     total_options = len(options)
 
+    if fullbox:
+        fullbox_menu(cols, rows, x, y, box_width, text)
+
     try:
         hide_cursor()
         while True:
@@ -83,14 +116,14 @@ def display_menu(options, rows, cols, x=2, y=20, box_width=BOX_WIDTH):
                         style = SELECTED_STYLE if is_selected else UNSELECTED_STYLE
 
                         move_cursor(x + col * (box_width + 2) + col, y + row * 3)
-                        print_color(f"┌{'─' * box_width}┐", color, style)
+                        print_color(f"┌{'─' * box_width}┐", color, styles=style)
 
                         option_text = options[index][0]
                         move_cursor(x + col * (box_width + 2) + col, y + row * 3 + 1)
-                        print_color(f"│ {option_text:^{box_width - 2}} │", color, style)
+                        print_color(f"│ {option_text:^{box_width - 2}} │", color, styles=style)
 
                         move_cursor(x + col * (box_width + 2) + col, y + row * 3 + 2)
-                        print_color(f"└{'─' * box_width}┘", color, style)
+                        print_color(f"└{'─' * box_width}┘", color, styles=style)
 
             key = msvcrt.getch()
             if key == b'\xe0':
