@@ -97,6 +97,8 @@ def display_menu(options, rows, cols, x=2, y=20, box_width=BOX_WIDTH, fullbox=Fa
         x (int, optional): The horizontal position (column) to display the menu.
         y (int, optional): The vertical position (line) to display the menu.
         box_width (int, optional): The width of each menu option box.
+        fullbox (bool, optional): Whether to display a full-box menu with a border and title.
+        text (str, optional): The title text to display in the full-box menu.
     """
     current_option = 0
     total_options = len(options)
