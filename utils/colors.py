@@ -17,24 +17,70 @@ class Color(Enum):
     def __str__(self):
         return self.value
 
-def print_color(text, color=Color.reset, styles=[], end='\n'):
+def apply_styles(text, styles=[]):
+    """Apply styles to text.
+
+    Args:
+        text (str): Text to apply styles to.
+        styles (list[Color], optional): List of styles to apply.
+
+    Returns:
+        str: Text with applied styles.
+    """
+    styled_text = f"{''.join([str(style) for style in styles])}{text}"
+    return styled_text
+
+def apply_format(text, format=None):
+    """Apply format to text.
+
+    Args:
+        text (str): Text to apply format to.
+        format (str, optional): Format to apply.
+
+    Returns:
+        str: Text with applied format.
+    """
+    if format is None:
+        formatted_text = text
+    elif 'f' in format:
+        try:
+            formatted_text = f"{float(text):{format}}"
+        except ValueError:
+            formatted_text = text
+    else:
+        formatted_text = f"{text:{format}}"
+
+    return formatted_text
+
+def print_color(text, color=Color.reset, reset=Color.reset, styles=[], format=None, end='\n'):
     """Print text with specific color and styles.
 
     Args:
         text (str): Text to print.
         color (Color, optional): Color to use.
+        reset (Color, optional): Color to reset.
         styles (list[Color], optional): List of styles to apply.
+        format (str, optional): Format to apply.
+        end (str, optional): String to print at the end.
     """
-    styled_text = f"{''.join([str(style) for style in styles])}{text}"
-    print(f"{color}{styled_text}{color.reset}", end=end)
+    styled_text = apply_styles(text, styles)
+    formatted_text = apply_format(styled_text, format)
+    print(f"{color}{formatted_text}{reset}", end=end)
 
-def string_color(text, color=Color.reset, styles=[]):
+def string_color(text, color=Color.reset, reset=Color.reset, styles=[], format=None):
     """Return a string with specific color and styles.
 
     Args:
         text (str): Text to print.
         color (Color, optional): Color to use.
+        reset (Color, optional): Reset color.
         styles (list[Color], optional): List of styles to apply.
+        format (str, optional): Format to apply.
+
+    Returns:
+        str: String with applied color, format and styles.
     """
-    styled_text = f"{''.join([str(style) for style in styles])}{text}"
-    return f"{color}{styled_text}{color.reset}"
+    styled_text = apply_styles(text, styles)
+    formatted_text = apply_format(styled_text, format)
+    final_text = f"{color}{formatted_text}{reset}"
+    return final_text
