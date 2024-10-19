@@ -1,8 +1,13 @@
 {
+    "tribute": "A tribute game to Knight Revenge",
     "start_menu": {
         "start": "Start game",
         "options": "Options",
         "about": "About",
         "exit": "Exit"
+    },
+    "settings": {
+        "select_language": "Select language",
+        "selected_language": "Selected language."
     }
 }
