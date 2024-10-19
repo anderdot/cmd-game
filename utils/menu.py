@@ -72,20 +72,20 @@ def fullbox_menu(cols, rows, x, y, box_width, text):
     total_height = rows * box_height
 
     move_cursor(x - 2, y - 3)
-    print_color(f"┌{'─' * total_width}┐", SELECTED_COLOR)
+    print_color(f"╔{'═' * total_width}╗", SELECTED_COLOR)
     move_cursor(x - 2, y - 2)
-    print_color(f"│{string_color(text=text, reset=Color.yellow):^{total_width + 8}}│", SELECTED_COLOR)
+    print_color(f"║{string_color(text=text, reset=Color.yellow):^{total_width + 8}}║", SELECTED_COLOR)
     move_cursor(x - 2, y - 1)
-    print_color(f"├{'─' * total_width}┤", SELECTED_COLOR)
+    print_color(f"╠{'═' * total_width}╣", SELECTED_COLOR)
 
     for i in range(total_height):
         move_cursor(x - 2, y + i)
-        print_color("│", SELECTED_COLOR)
+        print_color("║", SELECTED_COLOR)
         move_cursor(x + total_width - 1, y + i)
-        print_color("│", SELECTED_COLOR)
+        print_color("║", SELECTED_COLOR)
 
     move_cursor(x - 2, y + total_height)
-    print_color(f"└{'─' * total_width}┘", SELECTED_COLOR)
+    print_color(f"╚{'═' * total_width}╝", SELECTED_COLOR)
 
 def display_menu(options, rows, cols, x=2, y=20, box_width=BOX_WIDTH, fullbox=False, text=None):
     """Displays the menu in a grid of rows and columns, allowing navigation using the 'WASD' keys.
@@ -118,14 +118,14 @@ def display_menu(options, rows, cols, x=2, y=20, box_width=BOX_WIDTH, fullbox=Fa
                         style = SELECTED_STYLE if is_selected else UNSELECTED_STYLE
 
                         move_cursor(x + col * (box_width + 2) + col, y + row * 3)
-                        print_color(f"┌{'─' * box_width}┐", color, styles=style)
+                        print_color(f"╔{'═' * box_width}╗", color, styles=style)
 
                         option_text = options[index][0]
                         move_cursor(x + col * (box_width + 2) + col, y + row * 3 + 1)
-                        print_color(f"│ {option_text:^{box_width - 2}} │", color, styles=style)
+                        print_color(f"║ {option_text:^{box_width - 2}} ║", color, styles=style)
 
                         move_cursor(x + col * (box_width + 2) + col, y + row * 3 + 2)
-                        print_color(f"└{'─' * box_width}┘", color, styles=style)
+                        print_color(f"╚{'═' * box_width}╝", color, styles=style)
 
             key = msvcrt.getch()
             if key == b'\xe0':
