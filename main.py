@@ -3,7 +3,7 @@ from utils.menu import display_menu
 from utils.screen import clear_screen, set_cmd_window_size
 from utils.cursor import move_cursor
 from locales.loader import list_languages, load_language, load_default_language, count_languages
-from graphics.loader import print_logo
+from graphics.loader import print_art
 import msvcrt
 
 def start_game():
@@ -37,7 +37,7 @@ def exit_game():
 def menu():
     clear_screen()
     set_cmd_window_size(150, 40)
-    print_logo()
+    print_art('logo')
 
     start_menu = globals.language_data.get('start_menu', {})
     options_mapping = [

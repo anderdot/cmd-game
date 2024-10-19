@@ -1,0 +1,7 @@
+{
+    "logo": {
+        "path": "graphics/logo.txt",
+        "dimension": [69, 6],
+        "position": [41, 5]
+    }
+}
