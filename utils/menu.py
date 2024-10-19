@@ -1,6 +1,6 @@
 import msvcrt
 from utils.colors import Color, print_color, string_color
-from utils.cursor import hide_cursor, show_cursor, move_cursor
+from utils.cursor import move_cursor
 
 BOX_WIDTH = 41
 SELECTED_COLOR = Color.yellow
@@ -106,39 +106,34 @@ def display_menu(options, rows, cols, x=2, y=20, box_width=BOX_WIDTH, fullbox=Fa
     if fullbox:
         fullbox_menu(cols, rows, x, y, box_width, text)
 
-    try:
-        hide_cursor()
-        while True:
-            for row in range(rows):
-                for col in range(cols):
-                    index = row * cols + col
-                    if index < total_options:
-                        is_selected = index == current_option
-                        color = SELECTED_COLOR if is_selected else UNSELECTED_COLOR
-                        style = SELECTED_STYLE if is_selected else UNSELECTED_STYLE
+    while True:
+        for row in range(rows):
+            for col in range(cols):
+                index = row * cols + col
+                if index < total_options:
+                    is_selected = index == current_option
+                    color = SELECTED_COLOR if is_selected else UNSELECTED_COLOR
+                    style = SELECTED_STYLE if is_selected else UNSELECTED_STYLE
 
-                        move_cursor(x + col * (box_width + 2) + col, y + row * 3)
-                        print_color(f"╔{'═' * box_width}╗", color, styles=style)
+                    move_cursor(x + col * (box_width + 2) + col, y + row * 3)
+                    print_color(f"╔{'═' * box_width}╗", color, styles=style)
 
-                        option_text = options[index][0]
-                        move_cursor(x + col * (box_width + 2) + col, y + row * 3 + 1)
-                        print_color(f"║ {option_text:^{box_width - 2}} ║", color, styles=style)
+                    option_text = options[index][0]
+                    move_cursor(x + col * (box_width + 2) + col, y + row * 3 + 1)
+                    print_color(f"║ {option_text:^{box_width - 2}} ║", color, styles=style)
 
-                        move_cursor(x + col * (box_width + 2) + col, y + row * 3 + 2)
-                        print_color(f"╚{'═' * box_width}╝", color, styles=style)
+                    move_cursor(x + col * (box_width + 2) + col, y + row * 3 + 2)
+                    print_color(f"╚{'═' * box_width}╝", color, styles=style)
 
+        key = msvcrt.getch()
+        if key == b'\xe0':
             key = msvcrt.getch()
-            if key == b'\xe0':
-                key = msvcrt.getch()
-                change = get_arrow_change(key, cols)
-            elif key == b' ':
-                action = options[current_option][1]
-                action()
-                break
-            else:
-                change = get_change(key, cols)
+            change = get_arrow_change(key, cols)
+        elif key == b' ':
+            action = options[current_option][1]
+            action()
+            break
+        else:
+            change = get_change(key, cols)
 
-            current_option = update_option(current_option, change, total_options)
-
-    finally:
-        show_cursor()
+        current_option = update_option(current_option, change, total_options)

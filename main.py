@@ -1,7 +1,7 @@
 from data import globals
 from utils.menu import display_menu
 from utils.screen import clear_screen, set_cmd_window_size
-from utils.cursor import move_cursor
+from utils.cursor import move_cursor, hide_cursor, show_cursor
 from locales.loader import list_languages, load_language, load_default_language, count_languages
 from graphics.loader import print_art
 import msvcrt
@@ -24,6 +24,9 @@ def open_settings():
         options.append((option_text, lambda path=file_path: load_language(path)))
 
     display_menu(options, rows=count_languages(), cols=1, x=4, y=4, fullbox=True, text=settings.get('select_language'))
+    move_cursor(2, globals.window_size.get('height') - 1)
+    print(settings.get('selected_language'))
+    msvcrt.getch()
 
 def about_game():
     print("About this game...")
@@ -36,7 +39,7 @@ def exit_game():
 
 def menu():
     clear_screen()
-    set_cmd_window_size(150, 40)
+    set_cmd_window_size(globals.window_size.get('width'), globals.window_size.get('height'))
     print_art('logo')
 
     start_menu = globals.language_data.get('start_menu', {})
@@ -50,9 +53,11 @@ def menu():
     display_menu(options_mapping, rows=4, cols=1, x=59, y=27, box_width=30)
 
 def main():
+    hide_cursor()
     load_default_language()
     while globals.settings.get('loop'):
         menu()
+    show_cursor()
 
 if __name__ == "__main__":
     main()
