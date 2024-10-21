@@ -1,14 +1,31 @@
 from data import globals
-from utils.menu import display_menu
-from utils.screen import clear_screen, set_cmd_window_size
+from utils.screen import clear_screen, set_window_default
 from utils.cursor import move_cursor, hide_cursor, show_cursor
 from locales.loader import list_languages, load_language, load_default_language, count_languages
-from graphics.loader import print_art
-import msvcrt
+from scenes.scene import main_scene
+from inputs.input_handler import getkey
 
 def start_game():
-    print("Starting game...")
-    msvcrt.getch()
+    options_mapping = [
+        ("1", lambda: print("1...")),
+        ("2", lambda: print("2...")),
+        ("3", lambda: print("3...")),
+        ("4", lambda: print("4...")),
+        ("5", lambda: print("5...")),
+        ("6", lambda: print("6...")),
+        ("7", lambda: print("7...")),
+        ("8", lambda: print("8...")),
+    ]
+
+    rows = 2  # Número de linhas visíveis de opções por página
+    cols = 2  # Número de colunas visíveis de opções por página
+    x = 1     # Posição horizontal de início
+    y = 1     # Posição vertical de início
+    box_width = 11  # Largura das caixas de opções
+
+    # Criando e exibindo o menu com a barra de rolagem
+    # menu = ScrollMenu(options_mapping, rows, cols, x, y, box_width)
+    # menu.display()
 
 def open_settings():
     clear_screen()
@@ -23,41 +40,24 @@ def open_settings():
         file_path = lang_info['file']
         options.append((option_text, lambda path=file_path: load_language(path)))
 
-    display_menu(options, rows=count_languages(), cols=1, x=4, y=4, fullbox=True, text=settings.get('select_language'))
+    # display_menu(options, rows=count_languages(), cols=1, x=4, y=4, fullbox=True, text=settings.get('select_language'))
     move_cursor(2, globals.window_size.get('height') - 1)
     print(settings.get('selected_language'))
-    msvcrt.getch()
 
 def about_game():
-    print("About this game...")
-    msvcrt.getch()
+    pass
 
 def exit_game():
     globals.settings.update({"loop": False})
-    print("Exiting game...")
-    msvcrt.getch()
-
-def menu():
-    clear_screen()
-    set_cmd_window_size(globals.window_size.get('width'), globals.window_size.get('height'))
-    print_art('logo')
-
-    start_menu = globals.language_data.get('start_menu', {})
-    options_mapping = [
-        (start_menu.get('start'), start_game),
-        (start_menu.get('options'), open_settings),
-        (start_menu.get('about'), about_game),
-        (start_menu.get('exit'), exit_game)
-    ]
-
-    display_menu(options_mapping, rows=4, cols=1, x=59, y=27, box_width=30)
 
 def main():
+    set_window_default()
     hide_cursor()
     load_default_language()
     while globals.settings.get('loop'):
-        menu()
+        main_scene()
     show_cursor()
+    getkey()
 
 if __name__ == "__main__":
     main()
