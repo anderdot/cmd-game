@@ -1,7 +1,22 @@
 {
     "logo": {
         "path": "graphics/logo.txt",
-        "dimension": [69, 6],
-        "position": [41, 5]
+        "dimension": [108, 8],
+        "position": [21, 3]
+    },
+    "shortcuts": {
+        "path": "graphics/shortcuts.txt",
+        "dimension": [18, 26],
+        "position": [120, 18]
+    },
+    "character": {
+        "path": "graphics/character.txt",
+        "dimension": [30, 24],
+        "position": [15, 14]
+    },
+    "enemy": {
+        "path": "graphics/enemy3.txt",
+        "dimension": [63, 24],
+        "position": [84, 1]
     }
 }
