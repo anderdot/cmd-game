@@ -1,10 +1,22 @@
 {
     "tribute": "Um jogo em tributo ao Knight Revenge",
-    "start_menu": {
-        "start": "Começar jogo",
-        "options": "Opções",
-        "about": "Sobre",
-        "exit": "Sair"
+    "main_menu": {
+        "start": {
+            "text": "Jogar",
+            "tooltip": "Inicia o jogo"
+        },
+        "options": {
+            "text": "Opções",
+            "tooltip": "Acessa as opções do jogo"
+        },
+        "about": {
+            "text": "Sobre",
+            "tooltip": "Informações sobre o jogo"
+        },
+        "exit": {
+            "text": "Sair",
+            "tooltip": "Encerra o jogo :("
+        }
     },
     "settings": {
         "select_language": "Selecione o idioma",
