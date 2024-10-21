@@ -6,5 +6,5 @@ settings = {
 
 window_size = {
     "width": 150,
-    "height": 40
+    "height": 50
 }
