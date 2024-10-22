@@ -36,3 +36,29 @@ def display_tooltip(tooltip, x=2, y=49):
     clear_area(1, y, 1, 150)
     move_cursor(x, y)
     print(f"{tooltip}")
+
+def display_title(title, x, y):
+    length = len(title)
+    box_width = length + 4
+    clear_area(x, y, 3, box_width)
+    move_cursor(x, y)
+    print(f"┌{'─' * (box_width - 2)}┐")
+    move_cursor(x, y + 1)
+    print(f"┼ {title} ┼")
+    move_cursor(x, y + 2)
+    print(f"└{'─' * (box_width - 2)}┘")
+
+def draw_box(x, y, width, height):
+    """Draws a box with the given width and height at position (x, y), leaving the middle empty."""
+    clear_area(x, y, height, width)
+    move_cursor(x, y)
+    print(f"┌{'─' * (width - 2)}┐")
+
+    for i in range(1, height - 1):
+        move_cursor(x, y + i)
+        print("│", end="")
+        move_cursor(x + width - 1, y + i)
+        print("│")
+
+    move_cursor(x, y + height - 1)
+    print(f"└{'─' * (width - 2)}┘")

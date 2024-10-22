@@ -4,9 +4,9 @@
         "dimension": [108, 8],
         "position": [21, 3]
     },
-    "shortcuts": {
-        "path": "graphics/shortcuts.txt",
-        "dimension": [18, 26],
+    "controls": {
+        "path": "graphics/controls.txt",
+        "dimension": [20, 26],
         "position": [120, 18]
     },
     "character": {

@@ -16,7 +16,8 @@
         "exit": {
             "text": "Sair",
             "tooltip": "Encerra o jogo :("
-        }
+        },
+        "controls": "Controles"
     },
     "settings": {
         "select_language": "Selecione o idioma",
