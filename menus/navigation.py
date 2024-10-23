@@ -8,6 +8,9 @@ def close_menu():
     global close
     close = True
 
+def exit_game():
+    globals.settings.update({"loop": False})
+
 def update_option(current_option, change, total_options):
     return (current_option + change) % total_options
 

@@ -54,7 +54,19 @@ def render_menu(options, current_option, rows, cols, x, y, box_width, page_start
     if total_options > items_per_page:
         render_scroll_bar(total_options, items_per_page, current_option, rows, cols, x, y, box_width)
 
-def display_tooltip(key_tooltip, x=2, y=49):
+def display_tooltip(tooltip, x=2, y=49):
+    """Displays the translated tooltip at the given coordinates (x, y).
+
+    Args:
+        key_tooltip (str): The key for the translated tooltip.
+        x (int, optional): The x position for the tooltip. Defaults to 2.
+        y (int, optional): The y position for the tooltip. Defaults to 49.
+    """
+    clear_area(1, y, 1, 150)
+    move_cursor(x, y)
+    print(f"{tooltip}")
+
+def display_tooltip_key(key_tooltip, x=2, y=49):
     """Displays the translated tooltip at the given coordinates (x, y).
 
     Args:

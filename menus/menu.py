@@ -1,15 +1,16 @@
-from .navigation import display_menu, close_menu, display_tooltip
-from data import globals
+from .navigation import display_menu, display_tooltip, close_menu, exit_game
+from locales.translation import get_translated_text
 
 def main_menu():
-    main_menu = globals.language_data.get('main_menu', {})
+    main_menu, _ = get_translated_text('main.menu')
     options_mapping = [
         (main_menu.get('start').get('text'), lambda: display_tooltip("Starting game..."), main_menu.get('start').get('tooltip')),
+        (main_menu.get('load').get('text'), lambda: display_tooltip("Continuing game..."), main_menu.get('load').get('tooltip')),
         (main_menu.get('options').get('text'), options_menu, main_menu.get('options').get('tooltip')),
         (main_menu.get('about').get('text'), lambda: display_tooltip("About game..."), main_menu.get('about').get('tooltip')),
-        (main_menu.get('exit').get('text'), lambda: display_tooltip("Exiting game..."), main_menu.get('exit').get('tooltip'))
+        (main_menu.get('exit').get('text'), lambda: exit_game(), main_menu.get('exit').get('tooltip'))
     ]
-    display_menu(options_mapping, rows=4, cols=1, x=59, y=27, box_width=31)
+    display_menu(options_mapping, rows=5, cols=1, x=60, y=22, box_width=31)
 
 def options_menu():
     options_mapping = [
