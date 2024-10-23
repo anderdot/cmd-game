@@ -1,22 +1,28 @@
 {
-    "tribute": "Um jogo em tributo ao Knight Revenge",
-    "main_menu": {
-        "start": {
-            "text": "Jogar",
-            "tooltip": "Inicia o jogo"
+    "main": {
+        "menu": {
+            "start": {
+                "text": "Jogar",
+                "tooltip": "Inicia o jogo"
+            },
+            "load": {
+                "text": "Continuar",
+                "tooltip": "Continua o jogo"
+            },
+            "options": {
+                "text": "Opções",
+                "tooltip": "Acessa as opções do jogo"
+            },
+            "about": {
+                "text": "Sobre",
+                "tooltip": "Informações sobre o jogo"
+            },
+            "exit": {
+                "text": "Sair",
+                "tooltip": "Encerra o jogo :("
+            }
         },
-        "options": {
-            "text": "Opções",
-            "tooltip": "Acessa as opções do jogo"
-        },
-        "about": {
-            "text": "Sobre",
-            "tooltip": "Informações sobre o jogo"
-        },
-        "exit": {
-            "text": "Sair",
-            "tooltip": "Encerra o jogo :("
-        },
+        "tribute": "Um jogo em tributo ao Knight Revenge",
         "controls": "Controles"
     },
     "settings": {

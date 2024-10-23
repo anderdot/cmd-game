@@ -1,10 +1,29 @@
 {
-    "tribute": "A tribute game to Knight Revenge",
-    "start_menu": {
-        "start": "Start game",
-        "options": "Options",
-        "about": "About",
-        "exit": "Exit"
+    "main": {
+        "menu": {
+            "start": {
+                "text": "Play",
+                "tooltip": "Starts the game"
+            },
+            "load": {
+                "text": "Continue",
+                "tooltip": "Continues the game"
+            },
+            "options": {
+                "text": "Options",
+                "tooltip": "Accesses the game options"
+            },
+            "about": {
+                "text": "About",
+                "tooltip": "Information about the game"
+            },
+            "exit": {
+                "text": "Exit",
+                "tooltip": "Closes the game :("
+            }
+        },
+        "tribute": "A game in tribute to Knight Revenge",
+        "controls": "Controls"
     },
     "settings": {
         "select_language": "Select language",
