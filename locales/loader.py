@@ -15,7 +15,7 @@ def load_language(language_path):
     """Loads the content of a specific language file from the locales directory.
 
     Args:
-        lang_code (str): The language code corresponding to the .json file to load.
+        language_path (str): The path of specific language.
     """
     global language_data
     data = read_json(Path(language_path))

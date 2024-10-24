@@ -2,6 +2,7 @@ from .navigation import display_menu, display_tooltip, close_menu, exit_game
 from locales.translation import get_translated_text
 
 def main_menu():
+    """Loads the main menu options and their corresponding actions."""
     main_menu, _ = get_translated_text('main.menu')
     options_mapping = [
         (main_menu.get('start').get('text'), lambda: display_tooltip("Starting game..."), main_menu.get('start').get('tooltip')),

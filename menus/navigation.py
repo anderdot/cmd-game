@@ -5,16 +5,33 @@ from .render import render_menu, display_tooltip
 close = False
 
 def close_menu():
+    """Changes the global close variable to True, indicating that the menu should be closed."""
     global close
     close = True
 
 def exit_game():
+    """Changes from globals loop variable to False, indicating that the game should exit."""
     globals.settings.update({"loop": False})
 
 def update_option(current_option, change, total_options):
+    """Calculates the new option index based on the current option and the change value.
+
+    Returns:
+        int: the new option index.
+    """
     return (current_option + change) % total_options
 
 def display_menu(options, rows, cols, x=2, y=2, box_width=15):
+    """Displays a menu with navigation options.
+
+    Args:
+        options (list): A list of tuples containing the option text, action function, and tooltip text.
+        rows (int): The number of rows in the menu.
+        cols (int): The number of columns in the menu.
+        x (int, optional): The x-coordinate of the menu. Defaults to 2.
+        y (int, optional): The y-coordinate of the menu. Defaults to 2.
+        box_width (int, optional): The width of each menu item box. Defaults to 15.
+    """
     current_option = 0
     total_options = len(options)
     page_start = 0

@@ -2,6 +2,12 @@ from pathlib import Path
 from utils.storage import read_json, read_txt
 
 def print_art(art):
+    """Prints the specified art.
+
+    Args:
+        art (str): The name of the art to print.
+    """
+    art = art.lower()
     data = read_json(Path('graphics/arts.json'))
 
     if art in data:
