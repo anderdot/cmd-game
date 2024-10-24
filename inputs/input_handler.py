@@ -14,7 +14,6 @@ class Key(Enum):
 
 def getkey():
     """Get the key pressed by the user."""
-    msvcrt.getch()
     return msvcrt.getch()
 
 def get_key_change(key, rows, cols):

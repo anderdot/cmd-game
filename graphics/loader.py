@@ -7,7 +7,6 @@ def print_art(art):
     Args:
         art (str): The name of the art to print.
     """
-    art = art.lower()
     data = read_json(Path('graphics/arts.json'))
 
     if art in data:
