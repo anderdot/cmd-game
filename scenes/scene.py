@@ -5,11 +5,11 @@ from utils.screen import clear_screen
 from locales.translation import get_size_text
 
 def render_logo():
+    """Renders the logo"""
+    size = get_size_text('main.tribute')
     x = (150 - size) // 2 - 1
     y = 12
-    """Renders the logo"""
     print_art('logo')
-    size = get_size_text('main.tribute')
     display_title('main.tribute', x, y)
 
 def render_controls_box():
