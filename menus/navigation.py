@@ -41,7 +41,7 @@ def display_menu(options, rows, cols, x=2, y=2, box_width=15):
     while True:
         render_menu(options, current_option, rows, cols, x, y, box_width, page_start)
         display_tooltip(options[current_option][2])
-        key = getkey()
+        key = getkey().lower()
 
         if key == b' ':
             options[current_option][1]()
