@@ -28,5 +28,26 @@
     "settings": {
         "select_language": "Select language",
         "selected_language": "Selected language."
+    },
+    "name": {
+        "menu": {
+            "delete": {
+                "text": "Delete",
+                "tooltip": "Deletes the last entered character"
+            },
+            "space": {
+                "text": "Space",
+                "tooltip": "Separates words by adding a blank space"
+            },
+            "toggle": {
+                "text": "Toggle",
+                "tooltip": "Switches between uppercase and lowercase letters"
+            },
+            "save": {
+                "text": "SAVE",
+                "tooltip": "Saves the entered name"
+            }
+        },
+        "keyboard_text": "Enter your name"
     }
 }

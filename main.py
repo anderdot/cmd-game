@@ -2,7 +2,7 @@ from data import globals
 from utils.screen import set_window_default
 from utils.cursor import hide_cursor, show_cursor
 from locales.loader import load_default_language
-from scenes.scene import main_scene
+from scenes.scene import main_scene, name_scene
 
 def start_game():
     pass

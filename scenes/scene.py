@@ -1,8 +1,9 @@
-from menus.menu import main_menu
+from menus.menu import main_menu, name_menu
 from menus.render import display_title, display_title_box, draw_box
 from graphics.loader import print_art
 from utils.screen import clear_screen
 from locales.translation import get_size_text
+from data import globals
 
 def render_logo():
     """Renders the logo"""
@@ -36,3 +37,31 @@ def main_scene():
     render_logo()
     render_controls_box()
     render_main_menu_box()
+
+def render_name_box():
+    """Renders the name box."""
+    x = 61
+    y = 10
+    box_width = 30
+    box_height = 3
+    draw_box(x, y, box_width, box_height)
+
+def render_keyboard_box():
+    """Renders the keyboard box."""
+    x = 12
+    y = 17
+    box_width = 127
+    box_height = 17
+    display_title_box('name.keyboard_text', x, y, box_width, box_height)
+
+def name_scene():
+    """scene of setting the player's name"""
+    clear_screen()
+    render_name_box()
+    render_keyboard_box()
+    name_menu()
+
+def race_scene():
+    """scene of setting the player's race"""
+    clear_screen()
+    print(globals.player.get('name'))

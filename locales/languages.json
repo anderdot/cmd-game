@@ -8,7 +8,7 @@
         "en": {
             "name": "English",
             "file": "locales/en.json",
-            "status": "incomplete"
+            "status": "complete"
         }
     },
     "default_language": "pt-br"

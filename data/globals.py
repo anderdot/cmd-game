@@ -8,3 +8,7 @@ window_size = {
     "width": 150,
     "height": 50
 }
+
+player = {
+    "name": ""
+}

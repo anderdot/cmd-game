@@ -28,5 +28,26 @@
     "settings": {
         "select_language": "Selecione o idioma",
         "selected_language": "Idioma selecionado."
+    },
+    "name": {
+        "menu": {
+            "delete": {
+                "text": "Apagar",
+                "tooltip": "Apaga a última caractere digitada"
+            },
+            "space": {
+                "text": "Espaço",
+                "tooltip": "Divide palavras adicionando um espaço em branco"
+            },
+            "toggle": {
+                "text": "Alterna",
+                "tooltip": "Altera entre letras maiúsculas e minúsculas"
+            },
+            "save": {
+                "text": "SALVAR",
+                "tooltip": "Salva o nome digitado"
+            }
+        },
+        "keyboard_text": "Digite seu nome"
     }
 }
