@@ -39,7 +39,7 @@ def render_menu(options, current_option, rows, cols, x, y, box_width, page_start
         box_width (int): The width of each option box.
         page_start (int): The starting index of the current page of options.
     """
-    clear_area(x, y, rows * 3 + 1, cols * (box_width + 1) + 2)
+    clear_area(x, y, cols * (box_width + 1) + 2, rows * 3 + 1)
     total_options = len(options)
     items_per_page = rows * cols
 
@@ -62,7 +62,7 @@ def display_tooltip(tooltip, x=2, y=49):
         x (int, optional): The x position for the tooltip. Defaults to 2.
         y (int, optional): The y position for the tooltip. Defaults to 49.
     """
-    clear_area(1, y, 1, 150)
+    clear_area(1, y, 150, 1)
     move_cursor(x, y)
     print(f"{tooltip}")
 
@@ -75,7 +75,7 @@ def display_tooltip_key(key_tooltip, x=2, y=49):
         y (int, optional): The y position for the tooltip. Defaults to 49.
     """
     tooltip = get_translated_text(key_tooltip)
-    clear_area(1, y, 1, 150)
+    clear_area(1, y, 150, 1)
     move_cursor(x, y)
     print(f"{tooltip}")
 
@@ -89,7 +89,7 @@ def display_title(key_text, x, y):
     """
     translated_text, size = get_translated_text(key_text)
     box_width = size + 4
-    clear_area(x, y, 3, box_width)
+    clear_area(x, y, box_width, 3)
     move_cursor(x, y)
     print(f"┌{'─' * (box_width - 2)}┐")
     move_cursor(x, y + 1)
@@ -106,7 +106,7 @@ def draw_box(x, y, width, height):
         width (int): The width of the box.
         height (int): The height of the box.
     """
-    clear_area(x, y, height, width)
+    clear_area(x, y, width, height)
     move_cursor(x, y)
     print(f"┌{'─' * (width - 2)}┐")
 
@@ -135,10 +135,29 @@ def display_title_box(key_text, x, y, width, height, alignment='center'):
     size = get_size_text(key_text)
 
     if alignment == 'center':
-        title_x = x + (width - size) // 2 - 1
+        title_x = x + (width - size) // 2 - 2
     elif alignment == 'right':
         title_x = x + width - size - 6
     elif alignment == 'left':
         title_x = x + 2
 
     display_title(key_text, title_x, y - 1)
+
+def display_title_box_with_text(key_text, text, x, y, width, height, alignment='center'):
+    """Draws a box at (x, y) with specified width and height, and displays the translated title and text inside it.
+
+    Args:
+        key_text (str): The key for the translated text.
+        text (str): The text to be displayed inside the box.
+        x (int): The x position for the box.
+        y (int): The y position for the box.
+        width (int): The width of the box.
+        height (int): The height of the box.
+        alignment (str, optional): The text alignment ('left', 'center', 'right'). Defaults to 'center'.
+    """
+    display_title_box(key_text, x, y, width, height, alignment)
+    size = get_size_text(key_text)
+    text_x = (width  // 2) + x
+    text_y = y + height // 2
+    move_cursor(text_x, text_y)
+    print(text)

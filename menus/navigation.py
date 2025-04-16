@@ -6,8 +6,10 @@ close = False
 
 def close_menu():
     """Changes the global close variable to True, indicating that the menu should be closed."""
+    from scenes.scene_manager import pop_scene
     global close
     close = True
+    pop_scene()
 
 def exit_game():
     """Changes from globals loop variable to False, indicating that the game should exit."""
@@ -25,13 +27,14 @@ def display_menu(options, rows, cols, x=2, y=2, box_width=15):
     """Displays a menu with navigation options.
 
     Args:
-        options (list): A list of tuples containing the option text, action function, and tooltip text.
+        options (list): A list of tuples containing the option text, tooltip text, action function and optional function.
         rows (int): The number of rows in the menu.
         cols (int): The number of columns in the menu.
         x (int, optional): The x-coordinate of the menu. Defaults to 2.
         y (int, optional): The y-coordinate of the menu. Defaults to 2.
         box_width (int, optional): The width of each menu item box. Defaults to 15.
     """
+    from scenes.scene_manager import pop_scene
     current_option = 0
     total_options = len(options)
     page_start = 0
@@ -40,18 +43,22 @@ def display_menu(options, rows, cols, x=2, y=2, box_width=15):
     global close
     while True:
         render_menu(options, current_option, rows, cols, x, y, box_width, page_start)
-        display_tooltip(options[current_option][2])
+        display_tooltip(options[current_option][1])
         key = getkey().lower()
 
         if key == b' ':
-            options[current_option][1]()
+            options[current_option][2]()
         if key == b'q' or close:
             close = False
-            clear_area(x, y, rows * 3 + 1, cols * (box_width + 1) + 1)
+            clear_area(x, y, cols * (box_width + 1) + 1, rows * 3 + 1)
+            pop_scene()
             return
 
         change = get_key_change(key, rows, cols)
         current_option = update_option(current_option, change, total_options)
+
+        if len(options[current_option]) > 3:
+            options[current_option][3]()
 
         if current_option < page_start:
             page_start = max(0, current_option - (current_option % items_per_page))

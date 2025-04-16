@@ -1,9 +1,9 @@
-from menus.menu import main_menu, name_menu
-from menus.render import display_title, display_title_box, draw_box
+from menus.menu import main_menu, name_menu, race_menu
+from menus.render import display_title, display_title_box, display_title_box_with_text, draw_box
 from graphics.loader import print_art
 from utils.screen import clear_screen
 from locales.translation import get_size_text
-from data import globals
+from characters.races.loader import get_race
 
 def render_logo():
     """Renders the logo"""
@@ -61,7 +61,60 @@ def name_scene():
     render_keyboard_box()
     name_menu()
 
+def render_race_art_box(race):
+    """Renders the race box."""
+    x = 8
+    y = 9
+    box_width = 68
+    box_height = 30
+    draw_box(x, y, box_width, box_height)
+    print_art(race, box=True)
+
+def render_race_features_box(race):
+    """Renders the race features box."""
+    x = 77
+    y = 9
+    box_width = 67
+    box_height = 30
+    draw_box(x, y, box_width, box_height)
+
+def render_race_option(race):
+    """Renders the art for the given race.
+    Args:
+        race (str): The race for which to render the art.
+    """
+    x = 20
+    y = 3
+    width = 18
+    height = 5
+    spacing = 19
+    race_status = get_race(race)
+    for i, (attribute, value) in enumerate(race_status.items()):
+        display_title_box_with_text(f'attributes.{attribute}', value, x + i * spacing, y, width, height, 'center')
+
+    render_race_art_box(race)
+    render_race_features_box(race)
+
+def render_race_selector_box():
+    """Renders the selector race box."""
+    x = 8
+    y = 39
+    box_width = 136
+    box_height = 6
+    draw_box(x, y, box_width, box_height)
+
+def render_attribute_box():
+    """Renders the race attribute box."""
+    x = 8
+    y = 1
+    box_width = 136
+    box_height = 8
+    draw_box(x, y, box_width, box_height)
+
 def race_scene():
     """scene of setting the player's race"""
     clear_screen()
-    print(globals.player.get('name'))
+    render_race_selector_box()
+    render_attribute_box()
+    render_race_option('human')
+    race_menu()

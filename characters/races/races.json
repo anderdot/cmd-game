@@ -1,0 +1,28 @@
+{
+    "races": {
+        "human": {
+            "strength": 1,
+            "dexterity": 1,
+            "constitution": 1,
+            "intelligence": 1,
+            "wisdom": 1,
+            "charisma": 1
+        },
+        "elf": {
+            "strength": 0,
+            "dexterity": 2,
+            "constitution": 0,
+            "intelligence": 0,
+            "wisdom": 1,
+            "charisma": 0
+        },
+        "dwarf": {
+            "strength": 1,
+            "dexterity": 0,
+            "constitution": 2,
+            "intelligence": 0,
+            "wisdom": 0,
+            "charisma": 0
+        }
+    }
+}

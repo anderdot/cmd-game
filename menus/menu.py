@@ -5,38 +5,38 @@ from data import globals
 
 def main_menu():
     """Loads the main menu options and their corresponding actions."""
-    from scenes.scene import name_scene
+    from scenes.scene_manager import push_scene
     main_menu, _ = get_translated_text('main.menu')
     options_mapping = [
-        (main_menu.get('start').get('text'), lambda: name_scene(), main_menu.get('start').get('tooltip')),
-        (main_menu.get('load').get('text'), lambda: display_tooltip("Continuing game..."), main_menu.get('load').get('tooltip')),
-        (main_menu.get('options').get('text'), options_menu, main_menu.get('options').get('tooltip')),
-        (main_menu.get('about').get('text'), lambda: display_tooltip("About game..."), main_menu.get('about').get('tooltip')),
-        (main_menu.get('exit').get('text'), lambda: exit_game(), main_menu.get('exit').get('tooltip'))
+        (main_menu.get('start').get('text'), main_menu.get('start').get('tooltip'), lambda: push_scene('name_scene')),
+        (main_menu.get('load').get('text'), main_menu.get('load').get('tooltip'), lambda: display_tooltip("Continuing game...")),
+        (main_menu.get('options').get('text'), main_menu.get('options').get('tooltip'), options_menu),
+        (main_menu.get('about').get('text'), main_menu.get('about').get('tooltip'), lambda: display_tooltip("About game...")),
+        (main_menu.get('exit').get('text'), main_menu.get('exit').get('tooltip'), lambda: exit_game())
     ]
     display_menu(options_mapping, rows=5, cols=1, x=60, y=22, box_width=31)
 
 def options_menu():
     options_mapping = [
-        ("Graphics", graphics_menu, "Modify graphics settings"),
-        ("Sound", sound_menu, "Modify sound settings"),
-        ("Back", lambda: close_menu(), "Return to the previous menu")
+        ("Graphics", "Modify graphics settings", graphics_menu)
+        ("Sound", "Modify sound settings", sound_menu)
+        ("Back", "Return to the previous menu", lambda: close_menu())
     ]
     display_menu(options_mapping, rows=2, cols=1, x=1, y=1, box_width=21)
 
 def graphics_menu():
     options_mapping = [
-        ("Resolution", lambda: display_tooltip("Adjusting resolution..."), "Change screen resolution"),
-        ("Brightness", lambda: display_tooltip("Adjusting brightness..."), "Change screen brightness"),
-        ("Back", lambda: close_menu(), "Return to the options menu")
+        ("Resolution", "Change screen resolution", lambda: display_tooltip("Adjusting resolution...")),
+        ("Brightness", "Change screen brightness", lambda: display_tooltip("Adjusting brightness...")),
+        ("Back", "Return to the options menu", lambda: close_menu())
     ]
     display_menu(options_mapping, rows=1, cols=2, x=30, y=1, box_width=21)
 
 def sound_menu():
     options_mapping = [
-        ("Volume", lambda: display_tooltip("Adjusting volume..."), "Change the volume level"),
-        ("Mute", lambda: display_tooltip("Toggling mute..."), "Turn sound on or off"),
-        ("Back", lambda: close_menu(), "Return to the options menu")
+        ("Volume", "Change the volume level", lambda: display_tooltip("Adjusting volume...")),
+        ("Mute", "Turn sound on or off", lambda: display_tooltip("Toggling mute...")),
+        ("Back", "Return to the options menu", lambda: close_menu())
     ]
     display_menu(options_mapping, rows=1, cols=2, x=30, y=4, box_width=21)
 
@@ -92,9 +92,11 @@ def name_menu():
 
     def save_name():
         """Confirm the selected name."""
-        from scenes.scene import race_scene
+        from scenes.scene_manager import push_scene
+        if not selected_chars:
+            return
         globals.player.update({"name": "".join(selected_chars)})
-        race_scene()
+        push_scene('race_scene')
 
     def display_menu_options():
         """Display character selection options for the name entry."""
@@ -103,18 +105,45 @@ def name_menu():
         name_menu, _ = get_translated_text('name.menu')
         for i, char in enumerate(available_chars):
             options_mapping.append(
-                (char.upper() if upper_case else char.lower(), lambda c=char: add_char(c), "")
+                (char.upper() if upper_case else char.lower(), "", lambda c=char: add_char(c))
             )
             if i == 8:
-                options_mapping.append((name_menu.get('delete').get('text'), delete_char, name_menu.get('delete').get('tooltip')))
+                options_mapping.append((name_menu.get('delete').get('text'), name_menu.get('delete').get('tooltip'), delete_char))
             elif i == 17:
-                options_mapping.append((name_menu.get('space').get('text'), lambda c=' ': add_char(c), name_menu.get('space').get('tooltip')))
+                options_mapping.append((name_menu.get('space').get('text'), name_menu.get('space').get('tooltip'), lambda c=' ': add_char(c)))
             elif i == 26:
-                options_mapping.append((name_menu.get('toggle').get('text'), toggle_case, name_menu.get('toggle').get('tooltip')))
+                options_mapping.append((name_menu.get('toggle').get('text'), name_menu.get('toggle').get('tooltip'), toggle_case))
             elif i == 35:
-                options_mapping.append((name_menu.get('save').get('text'), save_name, name_menu.get('save').get('tooltip')))
+                options_mapping.append((name_menu.get('save').get('text'), name_menu.get('save').get('tooltip'), save_name))
 
         display_menu(options_mapping, rows=4, cols=10, x=16, y=20, box_width=11)
-
     display_selected_chars()
     display_menu_options()
+
+def race_menu():
+    """Displays the race selection menu for the player."""
+    from characters.races.loader import list_races
+    from scenes.scene import render_race_option
+    from utils.filters import filter_common_keys
+
+    races = list_races()
+    translated_races, _ = get_translated_text('races.menu')
+    races, translated_races = filter_common_keys(races, translated_races)
+    options_mapping = [
+        (
+            translated_races.get(race).get('name'),
+            translated_races.get(race).get('description'),
+            lambda r=race: save_race(r),
+            lambda r=race: render_race_option(r)
+        )
+        for race in translated_races.keys()
+    ]
+    display_menu(options_mapping, rows=1, cols=5, x=11, y=40, box_width=25)
+
+    def save_race(race):
+        """Confirm the selected race."""
+        from scenes.scene_manager import push_scene
+        globals.player.update({"race": race})
+        push_scene('class_scene')
+
+

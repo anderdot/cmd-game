@@ -7,7 +7,7 @@ def clear_screen():
     """Clears the terminal screen."""
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def clear_area(x, y, height, width):
+def clear_area(x, y, width, height):
     """Clears a specified rectangular area.
 
     Args:

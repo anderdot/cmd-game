@@ -6,17 +6,22 @@
     },
     "controls": {
         "path": "graphics/controls.txt",
-        "dimension": [20, 26],
+        "dimension": [26, 20],
         "position": [120, 18]
     },
-    "character": {
-        "path": "graphics/character.txt",
-        "dimension": [30, 24],
-        "position": [15, 14]
+    "human": {
+        "path": "graphics/races/human.txt",
+        "dimension": [18, 31],
+        "position": [27, 15]
     },
-    "enemy": {
-        "path": "graphics/enemy3.txt",
-        "dimension": [63, 24],
-        "position": [84, 1]
+    "elf": {
+        "path": "graphics/races/elf.txt",
+        "dimension": [18, 29],
+        "position": [27, 15]
+    },
+    "dwarf": {
+        "path": "graphics/races/dwarf.txt",
+        "dimension": [18, 32],
+        "position": [27, 15]
     }
 }

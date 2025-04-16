@@ -49,5 +49,30 @@
             }
         },
         "keyboard_text": "Digite seu nome"
+    },
+    "races": {
+        "menu": {
+            "human": {
+                "name": "Humano",
+                "description": "Apenas um humano."
+            },
+            "elf": {
+                "name": "Elfo",
+                "description": "Uma criatura mistica de longa vida."
+            },
+            "dwarf": {
+                "name": "Anão",
+                "description": "Uma resistência implacável."
+            }
+        },
+        "title": "Escolha a raça do seu personagem"
+    },
+    "attributes": {
+        "strength": "força",
+        "dexterity": "destreza",
+        "constitution": "constituição",
+        "intelligence": "inteligência",
+        "wisdom": "sabedoria",
+        "charisma": "carisma"
     }
 }

@@ -10,5 +10,8 @@ window_size = {
 }
 
 player = {
-    "name": ""
+    "name": "",
+    "race": ""
 }
+
+scene_stack = []
